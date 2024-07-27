@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id(libs.plugins.parcelize.withoutVersion.get().pluginId)
+    id(libs.plugins.safeargs.withoutVersion.get().pluginId)
 }
 
 android {
@@ -36,6 +38,16 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.coil)
+    implementation(libs.retrofit)
+    implementation(libs.picasso)
+    implementation(libs.glide)
+    implementation(libs.gson)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
