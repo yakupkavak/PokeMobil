@@ -18,7 +18,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildFeatures {
+        viewBinding = true
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -40,6 +42,7 @@ android {
 dependencies {
 
     implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.converter.gson)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.coil)
     implementation(libs.retrofit)
