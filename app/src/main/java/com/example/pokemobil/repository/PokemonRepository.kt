@@ -3,27 +3,27 @@ package com.example.pokemobil.repository
 import com.example.pokemobil.model.PokemonList
 import com.example.pokemobil.model.Resource
 import com.example.pokemobil.service.RetrofitAPI
-import com.example.pokemobil.util.const.BASE_URL
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import dagger.hilt.android.scopes.ActivityScoped
 
-class PokemonRepository {
+import javax.inject.Inject
 
-    val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-    val service = retrofit.create(RetrofitAPI::class.java)
-
+@ActivityScoped
+class PokemonRepository @Inject constructor(
+    private val retrofitAPI: RetrofitAPI
+) {
     suspend fun getPokemonList(): Resource<PokemonList> {
-        val response = service.pokemonList()
-        if (response.) {
-            response.body()?.let {
-                return@let Resource.success(it)
-            }
-        } else {
-            return Resource.error(null)
+        return try {
+            val response = retrofitAPI.pokemonList()
 
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    return@let Resource.success(it)
+                } ?: Resource.error(null)
+            } else {
+                return Resource.error(null)
+            }
+        } catch (e: Exception) {
+            return Resource.error(null)
         }
     }
 }

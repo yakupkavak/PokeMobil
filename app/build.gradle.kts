@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id(libs.plugins.parcelize.withoutVersion.get().pluginId)
     id(libs.plugins.safeargs.withoutVersion.get().pluginId)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -40,6 +42,11 @@ android {
 }
 
 dependencies {
+    val fragment_version = "1.8.2"
+    implementation("androidx.fragment:fragment-ktx:$fragment_version")
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.converter.gson)
@@ -60,4 +67,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+kapt {
+    correctErrorTypes = true
 }

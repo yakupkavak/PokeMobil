@@ -1,7 +1,7 @@
 package com.example.pokemobil.model
 
 data class Generationİv(
-    val diamond-pearl: DiamondPearl,
-    val heartgold-soulsilver: HeartgoldSoulsilver,
+    val diamond_pearl: DiamondPearl,
+    val heartgold_soulsilver: HeartgoldSoulsilver,
     val platinum: Platinum
 )
