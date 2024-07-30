@@ -1,6 +1,7 @@
 package com.example.pokemobil.repository
 
 import com.example.pokemobil.model.PokemonList
+import com.example.pokemobil.model.PokemonStatus
 import com.example.pokemobil.model.Resource
 import com.example.pokemobil.service.RetrofitAPI
 import dagger.hilt.android.scopes.ActivityScoped
@@ -14,6 +15,22 @@ class PokemonRepository @Inject constructor(
     suspend fun getPokemonList(): Resource<PokemonList> {
         return try {
             val response = retrofitAPI.pokemonList()
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    return@let Resource.success(it)
+                } ?: Resource.error(null)
+            } else {
+                return Resource.error(null)
+            }
+        } catch (e: Exception) {
+            return Resource.error(null)
+        }
+    }
+
+    suspend fun getPokemon(search: String): Resource<PokemonStatus>{
+        return try {
+            val response = retrofitAPI.pokemonSearch(search)
 
             if (response.isSuccessful) {
                 response.body()?.let {
