@@ -1,7 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:clickable="true"
+        android:contentDescription="@string/change_image"
+        android:focusable="true"
+        android:foregroundGravity="center"
+        android:src="@drawable/baseline_cameraswitch_24"
+        app:layout_constraintBottom_toBottomOf="@id/imageView"
+        app:layout_constraintEnd_toEndOf="@id/imageView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/margin_large"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalCenter"
+        app:layout_constraintEnd_toEndOf="@id/guidelineImageEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineImageStart"
+        app:layout_constraintTop_toBottomOf="@id/guidelineHorizontalStart"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/tvPokemonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/height_large"
+        android:text="@string/day"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivSword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/ivHeart"
+        app:srcCompat="@drawable/sword" />
+
+    <TextView
+        android:id="@+id/tvSword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:text="@string/day"
+        app:layout_constraintBottom_toBottomOf="@id/ivSword"
+        app:layout_constraintStart_toEndOf="@id/ivSword"
+        app:layout_constraintTop_toTopOf="@id/ivSword" />
+
+    <ImageView
+        android:id="@+id/ivGuard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:layout_constraintStart_toStartOf="@id/guidelineEnd"
+        app:layout_constraintTop_toBottomOf="@id/ivSpeed"
+        app:srcCompat="@drawable/guard" />
+
+    <TextView
+        android:id="@+id/tvGuard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:text="@string/day"
+        app:layout_constraintBottom_toBottomOf="@id/ivGuard"
+        app:layout_constraintStart_toEndOf="@id/ivGuard"
+        app:layout_constraintTop_toTopOf="@id/ivGuard" />
+
+    <ImageView
+        android:id="@+id/ivHeart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/ivExperience"
+        app:srcCompat="@drawable/heart" />
+
+    <TextView
+        android:id="@+id/tvHeart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:text="@string/day"
+        app:layout_constraintBottom_toBottomOf="@id/ivHeart"
+        app:layout_constraintStart_toEndOf="@id/ivHeart"
+        app:layout_constraintTop_toTopOf="@id/ivHeart" />
+
+    <ImageView
+        android:id="@+id/ivSpecialAttack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/ivSword"
+        app:srcCompat="@drawable/special_attack" />
+
+    <TextView
+        android:id="@+id/tvSpecialAttack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:text="@string/day"
+        app:layout_constraintBottom_toBottomOf="@id/ivSpecialAttack"
+        app:layout_constraintStart_toEndOf="@id/ivSpecialAttack"
+        app:layout_constraintTop_toTopOf="@id/ivSpecialAttack" />
+
+    <ImageView
+        android:id="@+id/ivSpecialDefence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:layout_constraintStart_toStartOf="@id/guidelineEnd"
+        app:layout_constraintTop_toBottomOf="@id/ivGuard"
+        app:srcCompat="@drawable/special_defence" />
+
+    <TextView
+        android:id="@+id/tvSpecialDefence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:text="@string/day"
+        app:layout_constraintBottom_toBottomOf="@id/ivSpecialDefence"
+        app:layout_constraintStart_toEndOf="@id/ivSpecialDefence"
+        app:layout_constraintTop_toTopOf="@id/ivSpecialDefence" />
+
+    <ImageView
+        android:id="@+id/ivSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:layout_constraintStart_toStartOf="@id/guidelineEnd"
+        app:layout_constraintTop_toBottomOf="@id/ivHeight"
+        app:srcCompat="@drawable/speed" />
+
+    <TextView
+        android:id="@+id/tvSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:text="@string/day"
+        app:layout_constraintBottom_toBottomOf="@id/ivSpeed"
+        app:layout_constraintStart_toEndOf="@id/ivSpeed"
+        app:layout_constraintTop_toTopOf="@id/ivSpeed" />
+
+    <ImageView
+        android:id="@+id/ivHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guidelineEnd"
+        app:layout_constraintTop_toBottomOf="@id/guidelineHorizontalCenter"
+        app:srcCompat="@drawable/height" />
+
+    <TextView
+        android:id="@+id/tvHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:text="@string/day"
+        app:layout_constraintBottom_toBottomOf="@id/ivHeight"
+        app:layout_constraintStart_toEndOf="@id/ivHeight"
+        app:layout_constraintTop_toTopOf="@id/ivHeight" />
+
+    <ImageView
+        android:id="@+id/ivExperience"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/guidelineHorizontalCenter"
+        app:srcCompat="@drawable/star" />
+
+    <TextView
+        android:id="@+id/tvExperience"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:text="@string/day"
+        app:layout_constraintBottom_toBottomOf="@id/ivExperience"
+        app:layout_constraintStart_toEndOf="@id/ivExperience"
+        app:layout_constraintTop_toTopOf="@id/ivExperience" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontalCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontalStart"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineImageStart"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineImageEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

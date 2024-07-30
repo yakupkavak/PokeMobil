@@ -22,5 +22,6 @@
     <string name="guess">Guess</string>
     <string name="success">Success</string>
     <string name="failure">Try Again</string>
+    <string name="change_image">Change Image</string>
 
 </resources>

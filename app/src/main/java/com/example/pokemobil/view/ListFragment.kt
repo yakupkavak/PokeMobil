@@ -71,7 +71,7 @@ class ListFragment : Fragment() {
     }
 
     private fun setOnClick(data: String) {
-        navigate(ListFragmentDirections.actionListFragmentToDetailFragment())
+        navigate(ListFragmentDirections.actionListFragmentToDetailFragment(data))
     }
 
     override fun onDestroyView() {
