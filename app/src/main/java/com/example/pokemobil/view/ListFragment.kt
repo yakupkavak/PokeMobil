@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import com.example.pokemobil.R
 import com.example.pokemobil.adapter.ListAdapter
 import com.example.pokemobil.databinding.FragmentListBinding
 import com.example.pokemobil.model.Status
@@ -51,20 +52,24 @@ class ListFragment : Fragment() {
         observe(viewModel.pokemonList) {
             when (it.status) {
                 Status.SUCCESS -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.lottieAnimation.cancelAnimation()
+                    binding.lottieAnimation.isVisible = false
+                    binding.rvList.isVisible = true
                     it.data?.let { data ->
                         val nameList = data.results.map { pokemonResult -> pokemonResult.name }
                         adapter.submit(nameList)
                         binding.rvList.adapter = adapter
                     }
                 }
+
                 Status.ERROR -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "There was an error", Toast.LENGTH_LONG)
-                        .show()
+                    binding.lottieAnimation.setAnimation(R.raw.cat)
+                    binding.rvList.isVisible = false
                 }
+
                 Status.LOADING -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.lottieAnimation.isVisible = true
+                    binding.rvList.isVisible = false
                 }
             }
         }

@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:id="@+id/fabPokemon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/system_background"
         android:clickable="true"
         android:contentDescription="@string/change_image"
         android:focusable="true"
         android:foregroundGravity="center"
         android:src="@drawable/baseline_cameraswitch_24"
-        app:layout_constraintBottom_toBottomOf="@id/imageView"
-        app:layout_constraintEnd_toEndOf="@id/imageView" />
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivPokemon"
+        app:layout_constraintEnd_toEndOf="@id/ivPokemon" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivPokemon"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/margin_large"
+        android:contentDescription="@string/pokemon"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalCenter"
         app:layout_constraintEnd_toEndOf="@id/guidelineImageEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineImageStart"
@@ -30,11 +32,12 @@
 
     <TextView
         android:id="@+id/tvPokemonName"
+        style="@style/BigSizeBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/height_large"
         android:text="@string/day"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/ivPokemon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -43,12 +46,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
+        android:contentDescription="@string/pokemon"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/ivHeart"
         app:srcCompat="@drawable/sword" />
 
     <TextView
         android:id="@+id/tvSword"
+        style="@style/MediumSizeMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_default"
@@ -62,12 +67,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
+        android:contentDescription="@string/pokemon"
         app:layout_constraintStart_toStartOf="@id/guidelineEnd"
         app:layout_constraintTop_toBottomOf="@id/ivSpeed"
         app:srcCompat="@drawable/guard" />
 
     <TextView
         android:id="@+id/tvGuard"
+        style="@style/MediumSizeMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_default"
@@ -81,12 +88,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
+        android:contentDescription="@string/pokemon"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/ivExperience"
         app:srcCompat="@drawable/heart" />
 
     <TextView
         android:id="@+id/tvHeart"
+        style="@style/MediumSizeMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_default"
@@ -100,12 +109,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
+        android:contentDescription="@string/pokemon"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/ivSword"
         app:srcCompat="@drawable/special_attack" />
 
     <TextView
         android:id="@+id/tvSpecialAttack"
+        style="@style/MediumSizeMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_default"
@@ -119,12 +130,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
+        android:contentDescription="@string/pokemon"
         app:layout_constraintStart_toStartOf="@id/guidelineEnd"
         app:layout_constraintTop_toBottomOf="@id/ivGuard"
         app:srcCompat="@drawable/special_defence" />
 
     <TextView
         android:id="@+id/tvSpecialDefence"
+        style="@style/MediumSizeMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_default"
@@ -138,12 +151,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
+        android:contentDescription="@string/pokemon"
         app:layout_constraintStart_toStartOf="@id/guidelineEnd"
         app:layout_constraintTop_toBottomOf="@id/ivHeight"
         app:srcCompat="@drawable/speed" />
 
     <TextView
         android:id="@+id/tvSpeed"
+        style="@style/MediumSizeMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_default"
@@ -156,12 +171,14 @@
         android:id="@+id/ivHeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/pokemon"
         app:layout_constraintStart_toStartOf="@id/guidelineEnd"
         app:layout_constraintTop_toBottomOf="@id/guidelineHorizontalCenter"
         app:srcCompat="@drawable/height" />
 
     <TextView
         android:id="@+id/tvHeight"
+        style="@style/MediumSizeMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_default"
@@ -174,6 +191,7 @@
         android:id="@+id/ivExperience"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/pokemon"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toBottomOf="@id/guidelineHorizontalCenter"
@@ -181,6 +199,7 @@
 
     <TextView
         android:id="@+id/tvExperience"
+        style="@style/MediumSizeMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_default"

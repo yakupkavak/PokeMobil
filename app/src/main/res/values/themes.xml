@@ -69,4 +69,11 @@
         <item name="android:background">@drawable/feed_row_design</item>
     </style>
 
+    <style name="Theme.CustomSplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/system_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/pokemon</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.General</item>
+    </style>
+
 </resources>

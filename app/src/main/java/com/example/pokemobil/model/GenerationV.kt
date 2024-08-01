@@ -1,5 +1,7 @@
 package com.example.pokemobil.model
 
+import com.google.gson.annotations.SerializedName
+
 data class GenerationV(
-    val black_white: BlackWhite
+    @SerializedName("black-white") val blackWhite: BlackWhite
 )

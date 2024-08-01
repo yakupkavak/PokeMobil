@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pokemobil.model.PokemonList
 import com.example.pokemobil.model.PokemonStatus
 import com.example.pokemobil.model.Resource
 import com.example.pokemobil.repository.PokemonRepository
@@ -17,7 +16,6 @@ class DetailViewModel @Inject constructor(
     private val repository: PokemonRepository
 ) : ViewModel() {
 
-
     private val _pokemon = MutableLiveData<Resource<PokemonStatus>>()
     val pokemon: LiveData<Resource<PokemonStatus>> get() = _pokemon
 
@@ -28,5 +26,4 @@ class DetailViewModel @Inject constructor(
             _pokemon.postValue(it)
         }
     }
-
 }
