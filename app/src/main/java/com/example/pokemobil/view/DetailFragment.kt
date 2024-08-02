@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.pokemobil.databinding.FragmentDetailBinding
 import com.example.pokemobil.model.Animated
-import com.example.pokemobil.model.Status
+import com.example.pokemobil.model.DetailPokemonModel
 import com.example.pokemobil.util.getUrl
 import com.example.pokemobil.util.observe
 import com.example.pokemobil.viewmodel.DetailViewModel
@@ -45,35 +45,35 @@ class DetailFragment : Fragment() {
     }
 
     private fun setObserve() {
-        viewModel.getPokemon(pokemonName)
-        observe(viewModel.pokemon) {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    it.data?.let { data ->
-                        val animated = data.sprites.versions.generationV.blackWhite.animated
-                        with(binding) {
-                            changeUrl(animated)
-                            fabPokemon.setOnClickListener {
-                                changeUrl(animated)
-                            }
-                            tvPokemonName.text = pokemonName
-                            tvHeight.text = data.height.toString()
-                            tvExperience.text = data.base_experience.toString()
-                            tvHeart.text = data.stats[0].base_stat.toString()
-                            tvSword.text = data.stats[1].base_stat.toString()
-                            tvGuard.text = data.stats[2].base_stat.toString()
-                            tvSpecialAttack.text = data.stats[3].base_stat.toString()
-                            tvSpecialDefence.text = data.stats[4].base_stat.toString()
-                            tvSpeed.text = data.stats[5].base_stat.toString()
-                        }
-                    }
-                }
-                Status.ERROR -> {
-                }
 
-                Status.LOADING -> {
-                }
+        viewModel.getPokemon({ detailPokemon -> setOnSuccess(detailPokemon) }, pokemonName)
+
+        observe(viewModel.success) {
+
+        }
+        observe(viewModel.loading) {
+
+        }
+        observe(viewModel.error) {
+
+        }
+    }
+
+    private fun setOnSuccess(dpMdel: DetailPokemonModel) {
+        with(binding) {
+            changeUrl(dpMdel.animated)
+            fabPokemon.setOnClickListener {
+                changeUrl(dpMdel.animated)
             }
+            tvPokemonName.text = pokemonName
+            tvHeight.text = dpMdel.height
+            tvExperience.text = dpMdel.exp
+            tvHeart.text = dpMdel.heart
+            tvSword.text = dpMdel.sword
+            tvGuard.text = dpMdel.guard
+            tvSpecialAttack.text = dpMdel.specialAttack
+            tvSpecialDefence.text = dpMdel.specialDefence
+            tvSpeed.text = dpMdel.speed
         }
     }
 

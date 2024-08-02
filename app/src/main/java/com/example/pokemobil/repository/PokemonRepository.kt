@@ -28,7 +28,7 @@ class PokemonRepository @Inject constructor(
         }
     }
 
-    suspend fun getPokemon(search: String): Resource<PokemonStatus>{
+    suspend fun getPokemon(search: String): Resource<PokemonStatus> {
         return try {
             val response = retrofitAPI.pokemonSearch(search)
 

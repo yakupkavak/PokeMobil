@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import com.example.pokemobil.R
 import com.example.pokemobil.adapter.ListAdapter
 import com.example.pokemobil.databinding.FragmentListBinding
 import com.example.pokemobil.model.Status
@@ -65,7 +64,7 @@ class ListFragment : Fragment() {
                     }
                 }
                 Status.ERROR -> {
-                    binding.lottieAnimation.setAnimation(R.raw.cat)
+                    viewModel.getList()
                     binding.rvList.isVisible = false
                 }
 
