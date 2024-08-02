@@ -22,5 +22,6 @@
     <string name="success">Başarılı</string>
     <string name="failure">Tekrar Dene</string>
     <string name="change_image">Change Image</string>
+    <string name="pokemon">pokemon</string>
 
 </resources>

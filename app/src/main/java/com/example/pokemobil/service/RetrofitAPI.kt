@@ -16,5 +16,4 @@ interface RetrofitAPI {
     suspend fun pokemonSearch(
         @Path("name") searchQuery: String,
     ): Response<PokemonStatus>
-    
 }

@@ -19,6 +19,10 @@ class ListViewModel @Inject constructor(
     private val _pokemonList = MutableLiveData<Resource<PokemonList>>()
     val pokemonList: LiveData<Resource<PokemonList>> get() = _pokemonList
 
+    init {
+        getList()
+    }
+
     fun getList() = viewModelScope.launch {
         _pokemonList.postValue(Resource.loading(null))
         val call = repository.getPokemonList()

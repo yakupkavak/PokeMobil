@@ -43,12 +43,11 @@ android {
 
 dependencies {
     implementation(libs.androidx.fragment.ktx)
-
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.lottie)
-
+    implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.converter.gson)
     implementation(libs.androidx.navigation.ui.ktx)

@@ -23,7 +23,7 @@ class DetailFragment : Fragment() {
     private val args: DetailFragmentArgs by navArgs()
     private lateinit var pokemonName: String
     private val viewModel: DetailViewModel by viewModels()
-    private var changePokemon = 0
+    private var changePokemon = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +51,6 @@ class DetailFragment : Fragment() {
                 Status.SUCCESS -> {
                     it.data?.let { data ->
                         val animated = data.sprites.versions.generationV.blackWhite.animated
-                        println(animated)
                         with(binding) {
                             changeUrl(animated)
                             fabPokemon.setOnClickListener {
@@ -69,7 +68,6 @@ class DetailFragment : Fragment() {
                         }
                     }
                 }
-
                 Status.ERROR -> {
                 }
 
@@ -80,12 +78,12 @@ class DetailFragment : Fragment() {
     }
 
     private fun changeUrl(urlData: Animated) {
-        if (changePokemon == 0) {
+        if (changePokemon) {
             binding.ivPokemon.getUrl(urlData.front_default)
-            changePokemon = 1
+            changePokemon = false
         } else {
             binding.ivPokemon.getUrl(urlData.back_default)
-            changePokemon = 0
+            changePokemon = true
         }
     }
 

@@ -45,23 +45,25 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObserve()
+        setOnRefresh()
     }
 
     private fun setObserve() {
-        viewModel.getList()
-        observe(viewModel.pokemonList) {
-            when (it.status) {
+        observe(viewModel.pokemonList) { pokemonList ->
+            when (pokemonList.status) {
                 Status.SUCCESS -> {
-                    binding.lottieAnimation.cancelAnimation()
-                    binding.lottieAnimation.isVisible = false
-                    binding.rvList.isVisible = true
-                    it.data?.let { data ->
-                        val nameList = data.results.map { pokemonResult -> pokemonResult.name }
-                        adapter.submit(nameList)
-                        binding.rvList.adapter = adapter
+                    with(binding) {
+                        lottieAnimation.cancelAnimation()
+                        lottieAnimation.isVisible = false
+                        rvList.isVisible = true
+                        pokemonList.data?.let { data ->
+                            val nameList = data.results.map { pokemonResult -> pokemonResult.name }
+                            adapter.submit(nameList)
+                            binding.rvList.adapter = adapter
+                        }
+                        swiperefresh.isRefreshing = false
                     }
                 }
-
                 Status.ERROR -> {
                     binding.lottieAnimation.setAnimation(R.raw.cat)
                     binding.rvList.isVisible = false
@@ -72,6 +74,12 @@ class ListFragment : Fragment() {
                     binding.rvList.isVisible = false
                 }
             }
+        }
+    }
+
+    private fun setOnRefresh() {
+        binding.swiperefresh.setOnRefreshListener {
+            viewModel.getList()
         }
     }
 

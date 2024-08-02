@@ -23,5 +23,6 @@
     <string name="success">Success</string>
     <string name="failure">Try Again</string>
     <string name="change_image">Change Image</string>
+    <string name="pokemon">pokemon</string>
 
 </resources>
