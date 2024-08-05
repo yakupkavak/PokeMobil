@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.example.pokemobil.adapter.ListAdapter
 import com.example.pokemobil.databinding.FragmentListBinding
-import com.example.pokemobil.model.Status
 import com.example.pokemobil.util.navigate
 import com.example.pokemobil.util.observe
 import com.example.pokemobil.viewmodel.ListViewModel
@@ -30,6 +29,11 @@ class ListFragment : Fragment() {
                 setOnClick(it)
             }
         }
+
+        viewModel.setStatus(
+            success = { data -> onSuccess(data) },
+            error = { onError() },
+            loading = { onLoading() })
     }
 
     override fun onCreateView(
@@ -48,32 +52,30 @@ class ListFragment : Fragment() {
     }
 
     private fun setObserve() {
-        observe(viewModel.pokemonList) { pokemonList ->
-            when (pokemonList.status) {
-                Status.SUCCESS -> {
-                    with(binding) {
-                        lottieAnimation.cancelAnimation()
-                        lottieAnimation.isVisible = false
-                        rvList.isVisible = true
-                        pokemonList.data?.let { data ->
-                            val nameList = data.results.map { pokemonResult -> pokemonResult.name }
-                            adapter.submit(nameList)
-                            binding.rvList.adapter = adapter
-                        }
-                        swiperefresh.isRefreshing = false
-                    }
-                }
-                Status.ERROR -> {
-                    viewModel.getList()
-                    binding.rvList.isVisible = false
-                }
-
-                Status.LOADING -> {
-                    binding.lottieAnimation.isVisible = true
-                    binding.rvList.isVisible = false
-                }
-            }
+        observe(viewModel.pokemonListSuccess) { pokemonList ->
+            onSuccess(pokemonList)
         }
+    }
+
+    private fun onSuccess(nameList: List<String>) {
+        with(binding) {
+            lottieAnimation.cancelAnimation()
+            lottieAnimation.isVisible = false
+            rvList.isVisible = true
+            adapter.submit(nameList)
+            binding.rvList.adapter = adapter
+            swiperefresh.isRefreshing = false
+        }
+    }
+
+    private fun onError() {
+        viewModel.getList()
+        binding.rvList.isVisible = false
+    }
+
+    private fun onLoading() {
+        binding.lottieAnimation.isVisible = true
+        binding.rvList.isVisible = false
     }
 
     private fun setOnRefresh() {
