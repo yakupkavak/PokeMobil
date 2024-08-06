@@ -1,6 +1,6 @@
 package com.example.pokemobil.di
 
-import com.example.pokemobil.repository.PokemonRepository
+import com.example.pokemobil.repository.BaseRepository
 import com.example.pokemobil.service.RetrofitAPI
 import com.example.pokemobil.util.const.BASE_URL
 import dagger.Module
@@ -26,7 +26,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRepository(api: RetrofitAPI): PokemonRepository{
-        return PokemonRepository(api)
+    fun provideRepository(): BaseRepository{
+        return BaseRepository()
     }
 }

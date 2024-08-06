@@ -52,10 +52,10 @@ class DetailFragment : Fragment() {
 
         }
         observe(viewModel.loading) {
-
+            println("loading")
         }
         observe(viewModel.error) {
-
+            println("error")
         }
     }
 

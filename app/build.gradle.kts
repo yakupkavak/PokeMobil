@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.facebook.shimmer)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)

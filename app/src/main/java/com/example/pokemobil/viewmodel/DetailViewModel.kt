@@ -8,15 +8,29 @@ import com.example.pokemobil.model.DetailPokemonModel
 import com.example.pokemobil.model.PokemonStatus
 import com.example.pokemobil.model.Resource
 import com.example.pokemobil.model.Status
-import com.example.pokemobil.repository.PokemonRepository
+import com.example.pokemobil.repository.BaseRepository
+import com.example.pokemobil.service.RetrofitAPI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: PokemonRepository
-) : ViewModel() {
+    private val repository: BaseRepository,
+    private val retrofitAPI: RetrofitAPI
+) : BaseViewModel(repository,retrofitAPI) {
+
+    override fun <T> onSuccess(data: Resource<T>) {
+        println("DetailViewModel success: ${data.data}")
+    }
+
+    override fun onError() {
+        println("DetailViewModel error")
+    }
+
+    override fun onLoading() {
+        println("DetailViewModel loading")
+    }
 
     private val _success = MutableLiveData<Resource<PokemonStatus>>()
     val success: LiveData<Resource<PokemonStatus>> get() = _success
@@ -30,7 +44,12 @@ class DetailViewModel @Inject constructor(
     fun getPokemon(
         onSuccess: (DetailPokemonModel) -> Unit, pokemonName: String
     ) = viewModelScope.launch {
-        val call = repository.getPokemon(pokemonName)
+
+        getApiCall{ retrofitAPI.pokemonSearch(pokemonName)}
+
+        _loading.postValue(Resource.loading(null))
+
+        val call = repository.fetchData {retrofitAPI.pokemonSearch(pokemonName)  }
         when (call.status) {
             Status.SUCCESS -> {
                 _success.postValue(call)
@@ -56,7 +75,6 @@ class DetailViewModel @Inject constructor(
             }
 
             Status.LOADING -> {
-                _loading.postValue(call)
             }
         }
     }

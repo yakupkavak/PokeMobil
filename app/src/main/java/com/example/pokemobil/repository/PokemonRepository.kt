@@ -1,37 +1,15 @@
 package com.example.pokemobil.repository
 
-import com.example.pokemobil.model.PokemonList
-import com.example.pokemobil.model.PokemonStatus
 import com.example.pokemobil.model.Resource
-import com.example.pokemobil.service.RetrofitAPI
 import dagger.hilt.android.scopes.ActivityScoped
-
-import javax.inject.Inject
+import retrofit2.Response
 
 @ActivityScoped
-class PokemonRepository @Inject constructor(
-    private val retrofitAPI: RetrofitAPI
-) {
-    suspend fun getPokemonList(): Resource<PokemonList> {
+class BaseRepository {
+
+    suspend inline fun <T> fetchData(crossinline call: suspend () -> Response<T>): Resource<T> {
+        val response = call()
         return try {
-            val response = retrofitAPI.pokemonList()
-
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    return@let Resource.success(it)
-                } ?: Resource.error(null)
-            } else {
-                return Resource.error(null)
-            }
-        } catch (e: Exception) {
-            return Resource.error(null)
-        }
-    }
-
-    suspend fun getPokemon(search: String): Resource<PokemonStatus> {
-        return try {
-            val response = retrofitAPI.pokemonSearch(search)
-
             if (response.isSuccessful) {
                 response.body()?.let {
                     return@let Resource.success(it)

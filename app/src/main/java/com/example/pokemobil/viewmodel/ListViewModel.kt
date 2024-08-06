@@ -5,14 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokemobil.model.Status
-import com.example.pokemobil.repository.PokemonRepository
+import com.example.pokemobil.repository.BaseRepository
+import com.example.pokemobil.service.RetrofitAPI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
-    private val repository: PokemonRepository
+    private val repository: BaseRepository,
+    private val retrofitAPI: RetrofitAPI
 ) : ViewModel() {
 
     private val _pokemonListSuccess = MutableLiveData<List<String>>()
@@ -36,7 +38,7 @@ class ListViewModel @Inject constructor(
 
     fun getList() = viewModelScope.launch {
         setOnLoading?.invoke()
-        val call = repository.getPokemonList()
+        val call = repository.fetchData {retrofitAPI.pokemonList()  }
         when (call.status) {
             Status.SUCCESS -> {
                 call.data?.let { data ->

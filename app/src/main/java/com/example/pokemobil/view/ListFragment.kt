@@ -52,9 +52,12 @@ class ListFragment : Fragment() {
     }
 
     private fun setObserve() {
+
         observe(viewModel.pokemonListSuccess) { pokemonList ->
             onSuccess(pokemonList)
         }
+
+
     }
 
     private fun onSuccess(nameList: List<String>) {
