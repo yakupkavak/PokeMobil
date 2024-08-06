@@ -46,16 +46,14 @@ class DetailFragment : Fragment() {
 
     private fun setObserve() {
 
-        viewModel.getPokemon({ detailPokemon -> setOnSuccess(detailPokemon) }, pokemonName)
+        viewModel.getPokemon(pokemonName)
 
         observe(viewModel.success) {
-
+            setOnSuccess(it)
         }
         observe(viewModel.loading) {
-            println("loading")
         }
         observe(viewModel.error) {
-            println("error")
         }
     }
 

@@ -2,7 +2,6 @@ package com.example.pokemobil.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokemobil.model.DetailPokemonModel
 import com.example.pokemobil.model.PokemonStatus
@@ -18,64 +17,51 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val repository: BaseRepository,
     private val retrofitAPI: RetrofitAPI
-) : BaseViewModel(repository,retrofitAPI) {
+) : BaseViewModel() {
 
-    override fun <T> onSuccess(data: Resource<T>) {
-        println("DetailViewModel success: ${data.data}")
-    }
+    private val _success = MutableLiveData<DetailPokemonModel>()
+    val success: LiveData<DetailPokemonModel> get() = _success
 
-    override fun onError() {
-        println("DetailViewModel error")
-    }
+    private val _loading = MutableLiveData<Resource<Any>>()
+    val loading: LiveData<Resource<Any>> get() = _loading
 
-    override fun onLoading() {
-        println("DetailViewModel loading")
-    }
-
-    private val _success = MutableLiveData<Resource<PokemonStatus>>()
-    val success: LiveData<Resource<PokemonStatus>> get() = _success
-
-    private val _loading = MutableLiveData<Resource<PokemonStatus>>()
-    val loading: LiveData<Resource<PokemonStatus>> get() = _loading
-
-    private val _error = MutableLiveData<Resource<PokemonStatus>>()
-    val error: LiveData<Resource<PokemonStatus>> get() = _error
+    private val _error = MutableLiveData<Resource<Any>>()
+    val error: LiveData<Resource<Any>> get() = _error
 
     fun getPokemon(
-        onSuccess: (DetailPokemonModel) -> Unit, pokemonName: String
+        pokemonName: String
     ) = viewModelScope.launch {
-
-        getApiCall{ retrofitAPI.pokemonSearch(pokemonName)}
-
         _loading.postValue(Resource.loading(null))
+        getApiCall(
+            dataCall = { repository.fetchData { retrofitAPI.pokemonSearch(pokemonName) } },
+            onSuccess = { data -> onSuccess(data) },
+            onError = { onError() },
+            onLoading = { onLoading() }
+        )
+    }
 
-        val call = repository.fetchData {retrofitAPI.pokemonSearch(pokemonName)  }
-        when (call.status) {
-            Status.SUCCESS -> {
-                _success.postValue(call)
-                call.data?.let { data ->
-                    val animated = data.sprites.versions.generationV.blackWhite.animated
-                    val height = data.height.toString()
-                    val exp = data.base_experience.toString()
-                    val heart = data.stats[0].base_stat.toString()
-                    val sword = data.stats[1].base_stat.toString()
-                    val guard = data.stats[2].base_stat.toString()
-                    val sAttack = data.stats[3].base_stat.toString()
-                    val sDefence = data.stats[4].base_stat.toString()
-                    val speed = data.stats[5].base_stat.toString()
-                    val pokeModel = DetailPokemonModel(
-                        animated, height, exp, heart, sword, guard, sAttack, sDefence, speed
-                    )
-                    onSuccess.invoke(pokeModel)
-                }
-            }
+    private fun onSuccess(data: PokemonStatus) {
+        val animated = data.sprites.versions.generationV.blackWhite.animated
+        val height = data.height.toString()
+        val exp = data.base_experience.toString()
+        val heart = data.stats[0].base_stat.toString()
+        val sword = data.stats[1].base_stat.toString()
+        val guard = data.stats[2].base_stat.toString()
+        val sAttack = data.stats[3].base_stat.toString()
+        val sDefence = data.stats[4].base_stat.toString()
+        val speed = data.stats[5].base_stat.toString()
+        val pokeModel = DetailPokemonModel(
+            animated, height, exp, heart, sword, guard, sAttack, sDefence, speed
+        )
+        _success.postValue(pokeModel)
+    }
 
-            Status.ERROR -> {
-                _error.postValue(call)
-            }
+    private fun onError() {
+        _error.postValue(Resource.error(null))
 
-            Status.LOADING -> {
-            }
-        }
+    }
+
+    private fun onLoading() {
+        _loading.postValue(Resource.loading(null))
     }
 }

@@ -1,6 +1,5 @@
 package com.example.pokemobil.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokemobil.model.Resource
@@ -12,37 +11,29 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
 
+open class BaseViewModel : ViewModel() {
 
-@HiltViewModel
-open class BaseViewModel @Inject constructor(
-    private val repository: BaseRepository,
-    private val retrofitAPI: RetrofitAPI
-) : ViewModel() {
+    fun <T> getApiCall(
+        dataCall: suspend () -> Resource<T>,
+        onSuccess: suspend (T) -> Unit,
+        onError: suspend () -> Unit,
+        onLoading: suspend () -> Unit
+    ) =
+        viewModelScope.launch {
+            when (dataCall().status) {
+                Status.SUCCESS -> {
+                    dataCall().data?.let { onSuccess.invoke(it) }
+                }
 
-    fun <T> getApiCall(dataCall: suspend () -> Response<T>) = viewModelScope.launch {
-        val call = repository.fetchData(dataCall)
-        when (call.status) {
-            Status.SUCCESS -> {
-                onSuccess(call)
-            }
+                Status.ERROR -> {
+                    onError.invoke()
+                }
 
-            Status.ERROR -> {
-                onError()
-            }
-
-            Status.LOADING -> {
-                onLoading()
+                Status.LOADING -> {
+                    onLoading.invoke()
+                }
             }
         }
-    }
-    open fun <T> onSuccess(data: Resource<T>) {
-    }
-
-    open fun onError() {
-    }
-
-    open fun onLoading() {
-    }
 }
 
 
