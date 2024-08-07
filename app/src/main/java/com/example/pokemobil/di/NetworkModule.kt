@@ -1,7 +1,7 @@
 package com.example.pokemobil.di
 
-import com.example.pokemobil.repository.BaseRepository
-import com.example.pokemobil.service.RetrofitAPI
+import com.example.pokemobil.repository.PokemonRepository
+import com.example.pokemobil.service.PokemonService
 import com.example.pokemobil.util.const.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -17,16 +17,16 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitService(): RetrofitAPI{
+    fun provideRetrofitService(): PokemonService {
         return Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
             .build()
-            .create(RetrofitAPI::class.java)
+            .create(PokemonService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideRepository(): BaseRepository{
-        return BaseRepository()
+    fun provideRepository(pokeService: PokemonService): PokemonRepository {
+        return PokemonRepository(pokeService)
     }
 }

@@ -29,11 +29,6 @@ class ListFragment : Fragment() {
                 setOnClick(it)
             }
         }
-
-        viewModel.setStatus(
-            success = { data -> onSuccess(data) },
-            error = { onError() },
-            loading = { onLoading() })
     }
 
     override fun onCreateView(
@@ -52,11 +47,16 @@ class ListFragment : Fragment() {
     }
 
     private fun setObserve() {
-
-        observe(viewModel.pokemonListSuccess) { pokemonList ->
+        onLoading()
+        observe(viewModel.success) { pokemonList ->
             onSuccess(pokemonList)
         }
-
+        observe(viewModel.loading) {
+            onLoading()
+        }
+        observe(viewModel.error) {
+            onError()
+        }
 
     }
 

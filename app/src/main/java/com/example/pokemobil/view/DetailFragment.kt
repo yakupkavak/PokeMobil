@@ -77,10 +77,10 @@ class DetailFragment : Fragment() {
 
     private fun changeUrl(urlData: Animated) {
         if (changePokemon) {
-            binding.ivPokemon.getUrl(urlData.front_default)
+            binding.ivPokemon.getUrl(urlData.back_default)
             changePokemon = false
         } else {
-            binding.ivPokemon.getUrl(urlData.back_default)
+            binding.ivPokemon.getUrl(urlData.front_default)
             changePokemon = true
         }
     }

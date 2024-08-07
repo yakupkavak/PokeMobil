@@ -2,59 +2,44 @@ package com.example.pokemobil.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pokemobil.model.Status
+import com.example.pokemobil.model.PokemonList
 import com.example.pokemobil.repository.BaseRepository
-import com.example.pokemobil.service.RetrofitAPI
+import com.example.pokemobil.repository.PokemonRepository
+import com.example.pokemobil.service.PokemonService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
-    private val repository: BaseRepository,
-    private val retrofitAPI: RetrofitAPI
-) : ViewModel() {
-
-    private val _pokemonListSuccess = MutableLiveData<List<String>>()
-    val pokemonListSuccess: LiveData<List<String>> get() = _pokemonListSuccess
+    private val pokemonRepository: PokemonRepository, private val pokemonService: PokemonService
+) : BaseViewModel() {
 
     init {
         getList()
     }
 
-    private var setOnSuccess: ((List<String>) -> Unit)? = null
+    private val _success = MutableLiveData<List<String>>()
+    val success: LiveData<List<String>> get() = _success
 
-    private var setOnError: (() -> Unit)? = null
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
 
-    private var setOnLoading: (() -> Unit)? = null
-
-    fun setStatus(success: ((List<String>) -> Unit), error: (() -> Unit), loading: (() -> Unit)) {
-        setOnSuccess = success
-        setOnError = error
-        setOnLoading = loading
-    }
+    private val _error = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean> get() = _error
 
     fun getList() = viewModelScope.launch {
-        setOnLoading?.invoke()
-        val call = repository.fetchData {retrofitAPI.pokemonList()  }
-        when (call.status) {
-            Status.SUCCESS -> {
-                call.data?.let { data ->
-                    val pokeList = data.results.map { pokemonResult -> pokemonResult.name }
-                    setOnSuccess?.invoke(pokeList)
-                    _pokemonListSuccess.postValue(pokeList)
-                }
-            }
+        getApiCall(dataCall = { pokemonRepository.getPokemonList() },
+            onSuccess = { data -> onSuccess(data) },
+            onError = { _error.postValue(true) },
+            onLoading = { _loading.postValue(true) })
+    }
 
-            Status.ERROR -> {
-                setOnError?.invoke()
-            }
-
-            Status.LOADING -> {
-                setOnLoading?.invoke()
-            }
+    private fun onSuccess(pokemonList: PokemonList?) {
+        pokemonList?.let { data ->
+            val pokeList = data.results.map { pokemonResult -> pokemonResult.name }
+            _success.postValue(pokeList)
         }
     }
 }

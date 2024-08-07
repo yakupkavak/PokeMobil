@@ -1,13 +1,15 @@
 package com.example.pokemobil.model
 
+import com.google.gson.annotations.SerializedName
+
 data class PokemonStatus(
-    val base_experience: Int,
+    @SerializedName("base_experience") val baseExperience: Int,
     val height: Int,
     val id: Int,
     val name: String,
     val order: Int,
     val species: Species,
     val sprites: Sprites,
-    val stats: List<Stat>,
+    val stats: List<Stats>,
     val weight: Int
 )
