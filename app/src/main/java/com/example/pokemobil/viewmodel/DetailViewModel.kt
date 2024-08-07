@@ -7,6 +7,7 @@ import com.example.pokemobil.model.PokemonStatus
 import com.example.pokemobil.model.Resource
 import com.example.pokemobil.model.StatData
 import com.example.pokemobil.repository.PokemonRepository
+import com.example.pokemobil.util.getStat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -42,15 +43,14 @@ class DetailViewModel @Inject constructor(
         pokemonStatus?.let { status ->
             val animated = status.sprites.versions.generationV.blackWhite.animated
             val statList = status.stats.map { StatData(it.stat.name, it.baseStat) }
-            //val heartt = statList.find { it.statName == "heart" }
             val height = status.height.toString()
             val exp = status.baseExperience.toString()
-            val heart = status.stats[0].baseStat.toString()
-            val sword = status.stats[1].baseStat.toString()
-            val guard = status.stats[2].baseStat.toString()
-            val sAttack = status.stats[3].baseStat.toString()
-            val sDefence = status.stats[4].baseStat.toString()
-            val speed = status.stats[5].baseStat.toString()
+            val heart = getStat("hp",statList)
+            val sword = getStat("attack",statList)
+            val guard = getStat("defense",statList)
+            val sAttack = getStat("special-attack",statList)
+            val sDefence = getStat("special-defence",statList)
+            val speed = getStat("speed",statList)
             val pokeModel = DetailPokemonModel(
                 animated, height, exp, heart, sword, guard, sAttack, sDefence, speed
             )
