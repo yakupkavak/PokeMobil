@@ -213,7 +213,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55" />
+        app:layout_constraintGuide_percent="0.50" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHorizontalStart"
@@ -249,5 +249,35 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.75" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:backgroundTint="@color/system_background"
+        android:clickable="true"
+        android:contentDescription="@string/change_image"
+        android:focusable="true"
+        android:foregroundGravity="center"
+        android:src="@drawable/next"
+        app:borderWidth="0dp"
+        app:layout_constraintStart_toEndOf="@id/guidelineImageEnd"
+        app:layout_constraintTop_toBottomOf="@id/ivSpecialDefence" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:backgroundTint="@color/system_background"
+        android:clickable="true"
+        android:contentDescription="@string/change_image"
+        android:focusable="true"
+        android:foregroundGravity="center"
+        android:src="@drawable/back"
+        app:borderWidth="0dp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineImageStart"
+        app:layout_constraintTop_toBottomOf="@id/ivSpecialAttack" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,6 +41,7 @@ class DetailViewModel @Inject constructor(
 
     private fun onSuccess(pokemonStatus: PokemonStatus?) {
         pokemonStatus?.let { status ->
+            val id = status.id
             val name = status.name
             val animated = status.sprites.versions.generationV.blackWhite.animated
             val statList = status.stats.map { StatData(it.stat.name, it.baseStat) }
@@ -53,7 +54,7 @@ class DetailViewModel @Inject constructor(
             val sDefence = getStat("special-defense", statList)
             val speed = getStat("speed", statList)
             val pokeModel = DetailPokemonModel(
-                name, animated, height, exp, heart, sword, guard, sAttack, sDefence, speed
+                id,name, animated, height, exp, heart, sword, guard, sAttack, sDefence, speed
             )
             _success.postValue(pokeModel)
         }

@@ -9,7 +9,7 @@
         android:name="com.example.pokemobil.view.DetailFragment"
         android:label="DetailFragment" >
         <argument
-            android:name="pokemonName"
+            android:name="pokemonId"
             app:argType="integer" />
     </fragment>
     <fragment
