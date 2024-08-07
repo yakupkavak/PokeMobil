@@ -2,7 +2,7 @@ package com.example.pokemobil.di
 
 import com.example.pokemobil.repository.PokemonRepository
 import com.example.pokemobil.service.PokemonService
-import com.example.pokemobil.util.const.BASE_URL
+import com.example.pokemobil.util.ServiceConst.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,7 +1,6 @@
 package com.example.pokemobil.repository
 
 import com.example.pokemobil.model.Resource
-import dagger.hilt.android.scopes.ActivityScoped
 import retrofit2.Response
 
 abstract class BaseRepository {

@@ -6,16 +6,13 @@ import com.example.pokemobil.model.DetailPokemonModel
 import com.example.pokemobil.model.PokemonStatus
 import com.example.pokemobil.model.Resource
 import com.example.pokemobil.model.StatData
-import com.example.pokemobil.repository.BaseRepository
 import com.example.pokemobil.repository.PokemonRepository
-import com.example.pokemobil.service.PokemonService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val pokemonRepository: PokemonRepository,
-    private val pokemonService: PokemonService
+    private val pokemonRepository: PokemonRepository
 ) : BaseViewModel() {
 
     private val _success = MutableLiveData<DetailPokemonModel>()

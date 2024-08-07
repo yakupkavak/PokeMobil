@@ -26,8 +26,10 @@ android {
     }
     buildTypes {
         debug {
+            buildConfigField("String", "BASE_URL_API", "\"https://pokeapi.co/\"")
         }
         release {
+            buildConfigField("String", "BASE_URL_API", "\"https://pokeapi.co/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

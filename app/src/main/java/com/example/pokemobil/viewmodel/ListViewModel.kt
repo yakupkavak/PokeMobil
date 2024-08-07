@@ -4,16 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.pokemobil.model.PokemonList
-import com.example.pokemobil.repository.BaseRepository
 import com.example.pokemobil.repository.PokemonRepository
-import com.example.pokemobil.service.PokemonService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
-    private val pokemonRepository: PokemonRepository, private val pokemonService: PokemonService
+    private val pokemonRepository: PokemonRepository
 ) : BaseViewModel() {
 
     init {
