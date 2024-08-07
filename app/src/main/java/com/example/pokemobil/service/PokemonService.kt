@@ -14,6 +14,6 @@ interface PokemonService {
 
     @GET("/api/v2/pokemon/{name}/")
     suspend fun pokemonSearch(
-        @Path("name") searchQuery: String,
+        @Path("name") searchQuery: Int,
     ): Response<PokemonStatus>
 }

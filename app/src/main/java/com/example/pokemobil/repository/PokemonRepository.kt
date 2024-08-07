@@ -13,6 +13,6 @@ class PokemonRepository @Inject constructor(
         fetchData { pokemonService.pokemonList() }
 
 
-    suspend fun getPokemon(pokemonName: String) =
-        fetchData { pokemonService.pokemonSearch(pokemonName) }
+    suspend fun getPokemon(pokemonId: Int) =
+        fetchData { pokemonService.pokemonSearch(pokemonId) }
 }

@@ -7,34 +7,36 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.pokemobil.databinding.PokemonRowBinding
+import com.example.pokemobil.model.PokemonNameUrl
+import com.example.pokemobil.util.getPokemonId
 
 class ListAdapter : Adapter<ListAdapter.ListViewHolder>() {
 
-    var onItemClick: ((String) -> Unit)? = null
+    var onItemClick: ((Int) -> Unit)? = null
 
-    private val diffUtil = object : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+    private val diffUtil = object : DiffUtil.ItemCallback<PokemonNameUrl>() {
+        override fun areItemsTheSame(oldItem: PokemonNameUrl, newItem: PokemonNameUrl): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areContentsTheSame(oldItem: PokemonNameUrl, newItem: PokemonNameUrl): Boolean {
             return oldItem == newItem
         }
     }
 
     private val asyncListDiffer = AsyncListDiffer(this, diffUtil)
 
-    fun submit(items: List<String>) {
+    fun submit(items: List<PokemonNameUrl>) {
         asyncListDiffer.submitList(items)
     }
 
     inner class ListViewHolder(private val binding: PokemonRowBinding) : ViewHolder(binding.root) {
-        fun bind(data: String) {
+        fun bind(data: PokemonNameUrl) {
             with(binding) {
                 root.setOnClickListener {
-                    onItemClick?.invoke(data)
+                    onItemClick?.invoke(getPokemonId(data.pokemonUrl))
                 }
-                tvRowPokemonName.text = data
+                tvRowPokemonName.text = data.pokemonName
             }
         }
     }

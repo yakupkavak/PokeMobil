@@ -10,7 +10,7 @@
         android:label="DetailFragment" >
         <argument
             android:name="pokemonName"
-            app:argType="string" />
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/listFragment"

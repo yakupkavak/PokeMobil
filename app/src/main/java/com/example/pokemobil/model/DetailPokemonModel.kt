@@ -1,6 +1,7 @@
 package com.example.pokemobil.model
 
 data class DetailPokemonModel(
+    val pokemonName: String,
     val animated: Animated,
     val height: String,
     val exp: String,

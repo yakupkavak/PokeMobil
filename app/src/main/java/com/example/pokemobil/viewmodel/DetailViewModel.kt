@@ -26,11 +26,11 @@ class DetailViewModel @Inject constructor(
     val error: LiveData<Resource<Any>> get() = _error
 
     fun getPokemon(
-        pokemonName: String
+        pokemonId: Int
     ) {
         _loading.postValue(Resource.loading(null))
         getApiCall(
-            dataCall = { pokemonRepository.getPokemon(pokemonName)},
+            dataCall = { pokemonRepository.getPokemon(pokemonId) },
             onSuccess = { data -> onSuccess(data) },
             onError = {
                 _error.postValue(Resource.error(null))
@@ -41,18 +41,19 @@ class DetailViewModel @Inject constructor(
 
     private fun onSuccess(pokemonStatus: PokemonStatus?) {
         pokemonStatus?.let { status ->
+            val name = status.name
             val animated = status.sprites.versions.generationV.blackWhite.animated
             val statList = status.stats.map { StatData(it.stat.name, it.baseStat) }
             val height = status.height.toString()
             val exp = status.baseExperience.toString()
-            val heart = getStat("hp",statList)
-            val sword = getStat("attack",statList)
-            val guard = getStat("defense",statList)
-            val sAttack = getStat("special-attack",statList)
-            val sDefence = getStat("special-defence",statList)
-            val speed = getStat("speed",statList)
+            val heart = getStat("hp", statList)
+            val sword = getStat("attack", statList)
+            val guard = getStat("defense", statList)
+            val sAttack = getStat("special-attack", statList)
+            val sDefence = getStat("special-defense", statList)
+            val speed = getStat("speed", statList)
             val pokeModel = DetailPokemonModel(
-                animated, height, exp, heart, sword, guard, sAttack, sDefence, speed
+                name, animated, height, exp, heart, sword, guard, sAttack, sDefence, speed
             )
             _success.postValue(pokeModel)
         }

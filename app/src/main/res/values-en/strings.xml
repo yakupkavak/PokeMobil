@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">InternTasks-2A</string>
-    <string name="day">Today</string>
+    <string name="day">Loading…</string>
     <string name="counter_menu">Counter</string>
     <string name="zero">0</string>
     <string name="use_viewmodel">Use ViewModel</string>

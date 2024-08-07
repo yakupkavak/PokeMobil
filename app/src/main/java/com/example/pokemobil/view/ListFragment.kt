@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.example.pokemobil.adapter.ListAdapter
 import com.example.pokemobil.databinding.FragmentListBinding
+import com.example.pokemobil.model.PokemonNameUrl
 import com.example.pokemobil.util.navigate
 import com.example.pokemobil.util.observe
 import com.example.pokemobil.viewmodel.ListViewModel
@@ -60,12 +61,12 @@ class ListFragment : Fragment() {
 
     }
 
-    private fun onSuccess(nameList: List<String>) {
+    private fun onSuccess(pokemonList: List<PokemonNameUrl>) {
         with(binding) {
             lottieAnimation.cancelAnimation()
             lottieAnimation.isVisible = false
             rvList.isVisible = true
-            adapter.submit(nameList)
+            adapter.submit(pokemonList)
             binding.rvList.adapter = adapter
             swiperefresh.isRefreshing = false
         }
@@ -87,7 +88,7 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun setOnClick(data: String) {
+    private fun setOnClick(data: Int) {
         navigate(ListFragmentDirections.actionListFragmentToDetailFragment(data))
     }
 

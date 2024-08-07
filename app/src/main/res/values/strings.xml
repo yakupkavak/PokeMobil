@@ -1,7 +1,7 @@
 <resources>
 
-    <string name="app_name">InternTasks-3A</string>
-    <string name="day">Bugün</string>
+    <string name="app_name">PokeMobil</string>
+    <string name="day">Yükleniyor…</string>
     <string name="zero">0</string>
     <string name="use_viewmodel">ViewModel Kullan</string>
     <string name="increase_counter">Sayacı Arttır</string>

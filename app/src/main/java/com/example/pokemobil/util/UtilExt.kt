@@ -15,3 +15,8 @@ fun ImageView.getUrl(url: String) {
 fun getStat(search: String,statList: List<StatData>) : String{
     return statList.find { it.statName == search }?.baseStat.toString()
 }
+
+fun getPokemonId(url: String): Int{
+    val matchResult = """.*/(\d+)/?$""".toRegex().find(url)
+    return matchResult?.groupValues?.get(1)?.toIntOrNull() ?: 0
+}

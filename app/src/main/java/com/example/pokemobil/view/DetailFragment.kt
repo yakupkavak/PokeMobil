@@ -21,7 +21,7 @@ class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val args: DetailFragmentArgs by navArgs()
-    private lateinit var pokemonName: String
+    private var pokemonName: Int = 0
     private val viewModel: DetailViewModel by viewModels()
     private var changePokemon = false
 
@@ -63,7 +63,7 @@ class DetailFragment : Fragment() {
             fabPokemon.setOnClickListener {
                 changeUrl(dpMdel.animated)
             }
-            tvPokemonName.text = pokemonName
+            tvPokemonName.text = dpMdel.pokemonName
             tvHeight.text = dpMdel.height
             tvExperience.text = dpMdel.exp
             tvHeart.text = dpMdel.heart

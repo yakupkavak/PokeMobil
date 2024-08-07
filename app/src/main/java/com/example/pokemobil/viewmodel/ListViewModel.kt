@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.pokemobil.model.PokemonList
+import com.example.pokemobil.model.PokemonNameUrl
 import com.example.pokemobil.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,8 +19,8 @@ class ListViewModel @Inject constructor(
         getList()
     }
 
-    private val _success = MutableLiveData<List<String>>()
-    val success: LiveData<List<String>> get() = _success
+    private val _success = MutableLiveData<List<PokemonNameUrl>>()
+    val success: LiveData<List<PokemonNameUrl>> get() = _success
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
@@ -36,7 +37,7 @@ class ListViewModel @Inject constructor(
 
     private fun onSuccess(pokemonList: PokemonList?) {
         pokemonList?.let { data ->
-            val pokeList = data.results.map { pokemonResult -> pokemonResult.name }
+            val pokeList = data.results.map { PokemonNameUrl(it.name,it.url) }
             _success.postValue(pokeList)
         }
     }
