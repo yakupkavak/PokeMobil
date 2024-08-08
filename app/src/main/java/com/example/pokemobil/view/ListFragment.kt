@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.example.pokemobil.adapter.ListAdapter
@@ -22,6 +23,7 @@ class ListFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: ListAdapter
     private val viewModel: ListViewModel by viewModels()
+    private var pokemonList: List<PokemonNameUrl> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +51,8 @@ class ListFragment : Fragment() {
 
     private fun setObserve() {
         onLoading()
-        observe(viewModel.success) { pokemonList ->
+        observe(viewModel.success) { dataList ->
+            pokemonList = dataList
             onSuccess(pokemonList)
         }
         observe(viewModel.loading) {
@@ -58,18 +61,21 @@ class ListFragment : Fragment() {
         observe(viewModel.error) {
             onError()
         }
-
     }
 
-    private fun onSuccess(pokemonList: List<PokemonNameUrl>) {
+    private fun onSuccess(dataList: List<PokemonNameUrl>) {
         with(binding) {
             lottieAnimation.cancelAnimation()
             lottieAnimation.isVisible = false
             rvList.isVisible = true
-            adapter.submit(pokemonList)
-            binding.rvList.adapter = adapter
             swiperefresh.isRefreshing = false
+            updateList(dataList)
         }
+    }
+
+    private fun updateList(dataList: List<PokemonNameUrl>) {
+        adapter.submit(dataList)
+        binding.rvList.adapter = adapter
     }
 
     private fun onError() {
@@ -86,6 +92,21 @@ class ListFragment : Fragment() {
         binding.swiperefresh.setOnRefreshListener {
             viewModel.getList()
         }
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    val filterList = pokemonList.filter { list ->
+                        list.pokemonName.contains(query, ignoreCase = true)
+                    }
+                    updateList(filterList)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
     }
 
     private fun setOnClick(data: Int) {
