@@ -1,4 +1,4 @@
-package com.example.pokemobil.domain.base
+package com.example.pokemobil.ui.main
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

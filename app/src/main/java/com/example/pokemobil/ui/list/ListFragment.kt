@@ -9,7 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.example.pokemobil.databinding.FragmentListBinding
-import com.example.pokemobil.domain.model.PokemonNameUrl
+import com.example.pokemobil.data.model.PokemonNameUrl
 import com.example.pokemobil.ui.extension.navigate
 import com.example.pokemobil.ui.extension.observe
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,7 +66,7 @@ class ListFragment : Fragment() {
             lottieAnimation.cancelAnimation()
             lottieAnimation.isVisible = false
             rvList.isVisible = true
-            swiperefresh.isRefreshing = false
+            swipeRefresh.isRefreshing = false
             updateList(dataList)
         }
     }
@@ -88,7 +88,7 @@ class ListFragment : Fragment() {
 
     private fun setOnRefresh() {
         with(binding) {
-            swiperefresh.setOnRefreshListener {
+            swipeRefresh.setOnRefreshListener {
                 viewModel.getList()
                 cleanQuery()
             }

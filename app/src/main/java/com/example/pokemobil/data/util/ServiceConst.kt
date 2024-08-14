@@ -1,4 +1,4 @@
-package com.example.pokemobil.domain.util
+package com.example.pokemobil.data.util
 
 object ServiceCountConst{
     const val MaxServiceCount = 200

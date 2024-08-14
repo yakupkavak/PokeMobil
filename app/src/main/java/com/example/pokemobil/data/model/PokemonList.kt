@@ -1,4 +1,4 @@
-package com.example.pokemobil.domain.model
+package com.example.pokemobil.data.model
 
 data class PokemonList(
     val count: Int,

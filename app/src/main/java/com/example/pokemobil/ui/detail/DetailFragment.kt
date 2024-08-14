@@ -5,15 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.example.pokemobil.R
 import com.example.pokemobil.databinding.FragmentDetailBinding
-import com.example.pokemobil.domain.model.Animated
-import com.example.pokemobil.domain.model.DetailPokemonModel
+import com.example.pokemobil.data.model.Animated
+import com.example.pokemobil.data.model.DetailPokemonModel
 import com.example.pokemobil.domain.extension.getUrl
-import com.example.pokemobil.domain.util.ServiceCountConst.MaxServiceCount
-import com.example.pokemobil.domain.util.ServiceCountConst.MinServiceCount
+import com.example.pokemobil.data.util.ServiceCountConst.MaxServiceCount
+import com.example.pokemobil.data.util.ServiceCountConst.MinServiceCount
 import com.example.pokemobil.ui.extension.observe
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,8 +56,16 @@ class DetailFragment : Fragment() {
             setOnSuccess(it)
         }
         observe(viewModel.loading) {
+            onLoading()
         }
         observe(viewModel.error) {
+            Toast.makeText(requireContext(),getString(R.string.error),Toast.LENGTH_LONG).show()
+        }
+    }
+    private fun onLoading(){
+        with(binding){
+            linearProgress.isIndeterminate = true
+            linearProgress.show()
         }
     }
 
@@ -63,6 +73,8 @@ class DetailFragment : Fragment() {
         pokemonId = dpModel.pokemonId
         changePokemon = true
         with(binding) {
+            linearProgress.isIndeterminate = false
+            linearProgress.hide()
             when (pokemonId) {
                 MinServiceCount -> {
                     btnBack.isVisible = false

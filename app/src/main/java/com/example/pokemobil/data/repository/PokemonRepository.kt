@@ -1,8 +1,8 @@
 package com.example.pokemobil.data.repository
 
 import com.example.pokemobil.data.service.PokemonService
-import com.example.pokemobil.domain.base.BaseRepository
-import dagger.hilt.android.scopes.ActivityScoped
+import com.example.pokemobil.data.util.ServiceCountConst.MaxServiceCount
+import com.example.pokemobil.data.base.BaseRepository
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
@@ -10,7 +10,7 @@ class PokemonRepository @Inject constructor(
 ) : BaseRepository() {
 
     suspend fun getPokemonList() =
-        fetchData { pokemonService.pokemonList() }
+        fetchData { pokemonService.pokemonList(MaxServiceCount) }
 
     suspend fun getPokemon(pokemonId: Int) =
         fetchData { pokemonService.pokemonSearch(pokemonId) }

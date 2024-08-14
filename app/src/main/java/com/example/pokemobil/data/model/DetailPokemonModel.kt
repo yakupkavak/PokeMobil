@@ -1,4 +1,4 @@
-package com.example.pokemobil.domain.model
+package com.example.pokemobil.data.model
 
 data class DetailPokemonModel(
     val pokemonId: Int,

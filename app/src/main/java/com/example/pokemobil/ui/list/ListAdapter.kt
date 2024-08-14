@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.pokemobil.databinding.PokemonRowBinding
-import com.example.pokemobil.domain.model.PokemonNameUrl
+import com.example.pokemobil.data.model.PokemonNameUrl
 import com.example.pokemobil.domain.extension.getPokemonId
 
 class ListAdapter : Adapter<ListAdapter.ListViewHolder>() {

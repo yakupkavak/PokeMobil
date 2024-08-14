@@ -3,7 +3,7 @@ package com.example.pokemobil.domain.extension
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.pokemobil.R
-import com.example.pokemobil.domain.model.StatData
+import com.example.pokemobil.data.model.StatData
 
 fun ImageView.getUrl(url: String) {
     Glide.with(this).asGif().load(url).thumbnail(

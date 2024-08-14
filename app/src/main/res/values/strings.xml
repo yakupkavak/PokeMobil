@@ -23,5 +23,6 @@
     <string name="failure">Tekrar Dene</string>
     <string name="change_image">Change Image</string>
     <string name="pokemon">pokemon</string>
+    <string name="error">Hata Oluştu</string>
 
 </resources>

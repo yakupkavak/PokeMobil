@@ -1,4 +1,4 @@
-package com.example.pokemobil.domain.model
+package com.example.pokemobil.data.model
 
 import com.google.gson.annotations.SerializedName
 

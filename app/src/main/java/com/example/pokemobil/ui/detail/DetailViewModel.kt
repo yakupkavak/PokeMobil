@@ -2,12 +2,12 @@ package com.example.pokemobil.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.pokemobil.domain.model.DetailPokemonModel
-import com.example.pokemobil.domain.model.PokemonStatus
-import com.example.pokemobil.domain.model.Resource
-import com.example.pokemobil.domain.model.StatData
+import com.example.pokemobil.data.model.DetailPokemonModel
+import com.example.pokemobil.data.model.PokemonStatus
+import com.example.pokemobil.data.util.Resource
+import com.example.pokemobil.data.model.StatData
 import com.example.pokemobil.data.repository.PokemonRepository
-import com.example.pokemobil.domain.base.BaseViewModel
+import com.example.pokemobil.ui.base.BaseViewModel
 import com.example.pokemobil.domain.extension.getStat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

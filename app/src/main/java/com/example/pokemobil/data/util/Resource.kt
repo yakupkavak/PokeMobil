@@ -1,4 +1,4 @@
-package com.example.pokemobil.domain.model
+package com.example.pokemobil.data.util
 
 data class Resource<out T>(val status: Status, val data: T?) {
 

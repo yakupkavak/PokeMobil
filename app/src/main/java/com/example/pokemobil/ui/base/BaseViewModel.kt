@@ -1,9 +1,9 @@
-package com.example.pokemobil.domain.base
+package com.example.pokemobil.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pokemobil.domain.model.Resource
-import com.example.pokemobil.domain.model.Status
+import com.example.pokemobil.data.util.Resource
+import com.example.pokemobil.data.util.Status
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {

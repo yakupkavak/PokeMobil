@@ -3,10 +3,10 @@ package com.example.pokemobil.ui.list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.pokemobil.domain.model.PokemonList
-import com.example.pokemobil.domain.model.PokemonNameUrl
+import com.example.pokemobil.data.model.PokemonList
+import com.example.pokemobil.data.model.PokemonNameUrl
 import com.example.pokemobil.data.repository.PokemonRepository
-import com.example.pokemobil.domain.base.BaseViewModel
+import com.example.pokemobil.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

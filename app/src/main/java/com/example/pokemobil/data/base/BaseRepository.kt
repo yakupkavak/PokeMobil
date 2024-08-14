@@ -1,6 +1,6 @@
-package com.example.pokemobil.domain.base
+package com.example.pokemobil.data.base
 
-import com.example.pokemobil.domain.model.Resource
+import com.example.pokemobil.data.util.Resource
 import retrofit2.Response
 
 abstract class BaseRepository {
